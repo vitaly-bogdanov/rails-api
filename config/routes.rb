@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   resources :sessions,     only: [:create]
   resources :registrations, only: [:create]
 
-  delete '/logout', to: 'sessions#logout'
-  get '/logged-in', to: 'sessions#logged_in'
+  post '/authorization', to: 'sessions#login'
+  delete '/logout',    to: 'sessions#logout'
+  get '/logged-in',  to: 'sessions#logged_in'
 
 end
