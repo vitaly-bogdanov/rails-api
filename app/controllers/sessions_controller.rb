@@ -36,8 +36,7 @@ class SessionsController < ApplicationController
         middle_image: url_for(post.middle_image),
         thumb_image: url_for(post.thumb_image)
       })
-
-      return posts
     end
+    return posts
   end
 end
