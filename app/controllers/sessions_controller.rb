@@ -12,18 +12,17 @@ class SessionsController < ApplicationController
   end
 
   def logged_in
-    render json: { id: session[:user_id] }, status: 200
-    # if @current_user
-    #   render json: { user: @current_user, posts: all_posts }, status: 201
-    # else
-    #   render json: { posts: all_posts, user: session[:user_id] }, status: 401
-    # end
+    if @current_user
+      render json: { user: @current_user, posts: all_posts }, status: 201
+    else
+      render json: { posts: all_posts }, status: 401
+    end
   end
 
-  # def logout
-  #   reset_session
-  #   render json: {}, status: 200
-  # end
+  def logout
+    reset_session
+    render json: {}, status: 200
+  end
 
   private
 
