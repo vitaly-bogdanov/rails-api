@@ -5,24 +5,25 @@ class SessionsController < ApplicationController
     user = User.find_by(name: params[:authorization][:name]).try(:authenticate, params[:authorization][:password])
     if user
       session[:user_id] = user.id
-      render json: { user: user }, status: 200
+      render json: { user: user }, status: 201
     else
-      render json: { user: {}, errors: { login: 'Пароль или имя пользователя неверно' } }, status: 401
+      render json: { user: {}, errors: { login: 'Пароль или имя пользователя неверно' } }, status: 403
     end
   end
 
   def logged_in
-    if @current_user
-      render json: { user: @current_user, posts: all_posts }, status: 200
-    else
-      render json: { posts: all_posts }, status: 401
-    end
+    render json: { id: session[:user_id] }, status: 200
+    # if @current_user
+    #   render json: { user: @current_user, posts: all_posts }, status: 201
+    # else
+    #   render json: { posts: all_posts, user: session[:user_id] }, status: 401
+    # end
   end
 
-  def logout
-    reset_session
-    render json: {}, status: 200
-  end
+  # def logout
+  #   reset_session
+  #   render json: {}, status: 200
+  # end
 
   private
 
