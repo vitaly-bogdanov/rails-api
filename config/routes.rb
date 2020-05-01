@@ -11,8 +11,11 @@ Rails.application.routes.draw do
       scope :sessions do # auth
         get '/logged-in', to: 'sessions#logged_in'
       end
+      scope :users do # registartion
+        post '/create', to: 'users#create'
+      end
     end
-    namespace :v2 do # auth v2
+    namespace :v2 do
     end
   end
 
