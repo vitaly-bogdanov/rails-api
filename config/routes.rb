@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end
       scope :sessions do # auth
         get '/logged-in', to: 'sessions#logged_in'
+        delete '/logout', to: 'sessions#logout'
       end
       scope :users do # registartion
         post '/create', to: 'users#create'

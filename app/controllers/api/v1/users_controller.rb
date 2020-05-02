@@ -1,8 +1,8 @@
 class Api::V1::UsersController < ApplicationController
   def create
-    user = User.new name: params[:registrations][:name],
-                     password: params[:registrations][:password],
-                     password_confirmation: params[:registrations][:password_confirmation],
+    user = User.new name: params[:name],
+                     password: params[:password],
+                     password_confirmation: params[:passwordConfirmation],
                      access: 'user'
 
     if user.save
