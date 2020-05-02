@@ -16,10 +16,10 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def create
-    post = Post.new title:       params[:title], 
+    post = Post.new title: params[:title], 
                     description: params[:description],
-                    body:        params[:body],
-                    image:       params[:image]
+                    body: params[:body],
+                    image: params[:image]
 
     if post.save
       render json: {
@@ -38,12 +38,10 @@ class Api::V1::PostsController < ApplicationController
 
   def update
     post = Post.find(params[:id])
-
     unless post.title.eql? params[:title] then post.title = params[:title] end 
     unless post.description.eql? params[:description] then post.description = params[:description] end
     unless post.body.eql? params[:body] then post.body = params[:body] end
-    unless params[:image].is_a?(Object) then post.image = params[:image] end
-    
+    unless params[:image].is_a?(Object) then post.image = params[:image] end 
     if post.save
       render json: {
         id: post.id,
@@ -62,7 +60,7 @@ class Api::V1::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     if post.destroy 
-      render json: { id: params }, status: 200
+      render json: {}, status: 200
     else
       render json: {}, status: 422
     end
