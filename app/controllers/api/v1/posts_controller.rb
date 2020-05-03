@@ -16,10 +16,7 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def create
-    post = Post.new title: params[:title], 
-                    description: params[:description],
-                    body: params[:body],
-                    image: params[:image]
+    post = Post.new(post_params)
 
     if post.save
       render json: {
@@ -64,5 +61,11 @@ class Api::V1::PostsController < ApplicationController
     else
       render json: {}, status: 422
     end
+  end
+
+  private
+
+  def post_params
+    params.permit(:title, :description, :body, :image)
   end
 end
