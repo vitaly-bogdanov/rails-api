@@ -1,5 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
   include CurrentUserConcern
+  include ProtectRoutesConcern
 
   def login
     user = User.find_by(name: params[:authorization][:name]).try(:authenticate, params[:authorization][:password])

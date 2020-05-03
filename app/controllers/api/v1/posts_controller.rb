@@ -1,4 +1,6 @@
 class Api::V1::PostsController < ApplicationController
+  include ProtectRoutesConcern
+  
   def index
     posts = []
     Post.all.each do |post|
@@ -17,7 +19,6 @@ class Api::V1::PostsController < ApplicationController
 
   def create
     post = Post.new(post_params)
-
     if post.save
       render json: {
         id: post.id,
