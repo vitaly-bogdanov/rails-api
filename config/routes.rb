@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end
       scope :sessions do # auth
         get '/logged-in', to: 'sessions#logged_in'
+        post '/login', to: 'sessions#login'
         delete '/logout', to: 'sessions#logout'
       end
       scope :users do # registartion
@@ -19,16 +20,4 @@ Rails.application.routes.draw do
     namespace :v2 do
     end
   end
-
-  post   '/posts',      to: 'posts#create'
-  post   '/update/:id', to: 'posts#update'
-  delete '/posts/:id',   to: 'posts#destroy'
-
-  resources :sessions,     only: [:create]
-  resources :registrations, only: [:create]
-
-  post '/authorization', to: 'sessions#login'
-  delete '/logout',    to: 'sessions#logout'
-  get '/logged-in',  to: 'sessions#logged_in'
-
 end

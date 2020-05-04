@@ -3,7 +3,7 @@ class Api::V1::SessionsController < ApplicationController
   include ProtectRoutesConcern
 
   def login
-    user = User.find_by(name: params[:authorization][:name]).try(:authenticate, params[:authorization][:password])
+    user = User.find_by(name: params[:name]).try(:authenticate, params[:password])
     if user
       session[:user_id] = user.id
       render json: { user: user }, status: 201
