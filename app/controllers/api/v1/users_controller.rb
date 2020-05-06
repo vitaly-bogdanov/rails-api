@@ -9,7 +9,7 @@ class Api::V1::UsersController < ApplicationController
       session[:user_id] = user.id
       render json: { user: user }, status: 201
     else
-      render json: { errors: user.errors }, status: 403
+      render json: { errors: user.errors }, status: 422
     end
   end
 end

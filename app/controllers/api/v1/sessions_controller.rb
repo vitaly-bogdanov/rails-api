@@ -14,7 +14,7 @@ class Api::V1::SessionsController < ApplicationController
 
   def logged_in
     if @current_user
-      render json: { user: @current_user, posts: all_posts }, status: 201
+      render json: { user: @current_user, posts: all_posts }, status: 200
     else
       render json: { posts: all_posts }, status: 401
     end
@@ -28,16 +28,16 @@ class Api::V1::SessionsController < ApplicationController
   private
 
   def all_posts
-    posts = []
-    Post.all.each do |post|
-      posts.push({
-        id: post.id, title: post.title, 
-        description: post.description, body: post.body,
-        large_image: url_for(post.large_image),
-        middle_image: url_for(post.middle_image),
-        thumb_image: url_for(post.thumb_image)
-      })
+    posts = Rails.cache.fetch(:posts) do
+      Post.all.map do |post|
+        {
+          id: post.id, title: post.title, 
+          description: post.description, body: post.body,
+          large_image: url_for(post.large_image),
+          middle_image: url_for(post.middle_image),
+          thumb_image: url_for(post.thumb_image)
+        }
+      end
     end
-    return posts
   end
 end

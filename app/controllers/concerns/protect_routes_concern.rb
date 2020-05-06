@@ -7,7 +7,7 @@ module ProtectRoutesConcern
 
   def session_verification
     if session[:user_id].nil?
-      render json: {}, status: 401
+      render json: {}, status: 423
     end
   end
 end

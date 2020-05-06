@@ -30,7 +30,7 @@ class Api::V1::PostsController < ApplicationController
         thumb_image: url_for(post.thumb_image)
       }, status: 201
     else
-      render json: { errors: post.errors }, status: 403
+      render json: { errors: post.errors }, status: 422
     end
   end
 
@@ -56,12 +56,7 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def destroy
-    post = Post.find(params[:id])
-    if post.destroy 
-      render json: {}, status: 200
-    else
-      render json: {}, status: 422
-    end
+    if Post.find(params[:id]).destroy then render json: {}, status: 200 end
   end
 
   private
