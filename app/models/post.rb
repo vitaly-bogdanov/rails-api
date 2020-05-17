@@ -24,14 +24,20 @@ class Post < ApplicationRecord
   validate :validate_image
 
   def large_image
-    image.variant(resize: '540x426!').processed
+    if image.attached?
+      image.variant(resize: '540x426!').processed
+    end
   end
 
   def middle_image
-    image.variant(resize: '270x213!').processed
+    if image.attached?
+      image.variant(resize: '270x213!').processed
+    end
   end
 
   def thumb_image
-    image.variant(resize: '135x107!').processed
+    if image.attached?
+      image.variant(resize: '135x107!').processed
+    end
   end
 end

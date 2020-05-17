@@ -6,9 +6,9 @@ class Api::V1::SessionsController < ApplicationController
     user = User.find_by(name: params[:name]).try(:authenticate, params[:password])
     if user
       session[:user_id] = user.id
-      render json: { user: user }, status: 201
+      render json: { user: user }, status: 200
     else
-      render json: { user: {}, errors: { login: 'Пароль или имя пользователя неверно' } }, status: 403
+      render json: { errors: [ 'Пароль или имя пользователя неверно' ] }, status: 403
     end
   end
 
