@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'posts#index'
+  root 'api/v1/posts#index'
   namespace :api do
     namespace :v1 do
       scope :posts do # CRUD posts
