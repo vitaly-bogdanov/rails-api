@@ -1,0 +1,28 @@
+version: "3.1"
+
+volumes:
+  gems_store:
+  postgres_store:
+
+services:
+  pg:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+    ports:
+      - 8080:5432
+    volumes:
+      - postgres_store:/var/postgresql/data
+  rails:
+    build: .
+    restart: always
+    ports:
+      - 3001:3001
+    command: bundle exec rails server -b 0.0.0.0 -p 3001
+    volumes:
+      - gems_store:/usr/local/bundle/
+      - .:/myapp
+    depends_on: 
+      - pg
