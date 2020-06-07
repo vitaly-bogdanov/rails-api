@@ -31,7 +31,7 @@ class Api::V1::SessionsController < ApplicationController
     posts = Rails.cache.fetch(:posts) do
       Post.all.map do |post|
         {
-          id: post.id, title: post.title, 
+          id: post.id, title: post.title,
           description: post.description, body: post.body,
           large_image: url_for(post.large_image),
           middle_image: url_for(post.middle_image),
